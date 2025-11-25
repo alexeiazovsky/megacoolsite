@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить тикет - Т-Банк Аналитика</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .form-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        .step {
+            text-align: center;
+            flex: 1;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        .step.active .step-number {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-bar-chart-line-fill me-2"></i>
+                Т-Банк | Аналитика поддержки
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%); min-height: 100vh;">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link text-white" href="index.html"><i class="bi bi-speedometer2 me-2"></i>Дашборд</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="table.html"><i class="bi bi-ticket-detailed me-2"></i>Тикеты</a></li>
+                        <li class="nav-item"><a class="nav-link active text-white" href="add-ticket.html"><i class="bi bi-plus-circle me-2"></i>Добавить тикет</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="auth.html"><i class="bi bi-shield-lock me-2"></i>Авторизация</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-bold">Создание нового тикета</h1>
+                    <a href="table.html" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Назад к списку
+                    </a>
+                </div>
+
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div>Основная информация</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Детали проблемы</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Подтверждение</div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="form-section">
+                    <form id="ticketForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="clientName" class="form-label">ФИО клиента *</label>
+                                    <input type="text" class="form-control" id="clientName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="clientPhone" class="form-label">Телефон</label>
+                                    <input type="tel" class="form-control" id="clientPhone">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="clientEmail" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="clientEmail" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="channel" class="form-label">Канал обращения *</label>
+                                    <select class="form-select" id="channel" required>
+                                        <option value="">Выберите канал</option>
+                                        <option value="chat">Чат</option>
+                                        <option value="phone">Телефон</option>
+                                        <option value="email">Email</option>
+                                        <option value="branch">Отделение банка</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Категория проблемы *</label>
+                                    <select class="form-select" id="category" required>
+                                        <option value="">Выберите категорию</option>
+                                        <option value="card">Карты</option>
+                                        <option value="mobile">Мобильный банк</option>
+                                        <option value="internet">Интернет-банк</option>
+                                        <option value="payment">Платежи и переводы</option>
+                                        <option value="account">Счета и вклады</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="priority" class="form-label">Приоритет *</label>
+                                    <select class="form-select" id="priority" required>
+                                        <option value="">Выберите приоритет</option>
+                                        <option value="low">Низкий</option>
+                                        <option value="medium">Средний</option>
+                                        <option value="high">Высокий</option>
+                                        <option value="critical">Критический</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Тема обращения *</label>
+                            <input type="text" class="form-control" id="subject" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Описание проблемы *</label>
+                            <textarea class="form-control" id="description" rows="5" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="attachments" class="form-label">Прикрепленные файлы</label>
+                            <input type="file" class="form-control" id="attachments" multiple>
+                            <div class="form-text">Можно прикрепить несколько файлов</div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-secondary me-md-2">Отмена</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-plus-circle me-2"></i>Создать тикет
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Т-Банк Аналитика поддержки</h5>
+                    <p class="mb-0">Система анализа удовлетворенности клиентов</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">&copy; 2024 Т-Банк. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('ticketForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Тикет успешно создан!');
+            window.location.href = 'table.html';
+        });
+    </script>
+</body>
+</html>
