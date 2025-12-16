@@ -8,34 +8,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         :root {
-            --tbank-yellow: #FFD700;
-            --tbank-black: #1a1a1a;
-            --tbank-dark: #2d2d2d;
+            --primary-dark: #0a1929;
+            --primary-blue: #1a365d;
+            --accent-teal: #0ea5e9;
+            --accent-cyan: #22d3ee;
+            --neutral-light: #f8fafc;
+            --neutral-gray: #64748b;
+            --neutral-dark: #1e293b;
+            --gradient-primary: linear-gradient(135deg, #0ea5e9, #22d3ee);
+            --gradient-dark: linear-gradient(135deg, #0a1929, #1e293b);
         }
         
         body {
-            background: linear-gradient(135deg, var(--tbank-black) 0%, #333 100%);
-            color: white;
+            background: var(--gradient-dark);
+            color: var(--neutral-light);
             font-family: 'Segoe UI', system-ui, sans-serif;
         }
         
         .cyber-card {
-            background: rgba(45, 45, 45, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
             transition: all 0.3s ease;
         }
         
         .nav-cyber {
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(15px);
-            border-right: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(10, 25, 41, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(14, 165, 233, 0.15);
         }
         
         .nav-cyber .nav-link {
-            color: #ccc !important;
+            color: #cbd5e1 !important;
             padding: 1rem 1.5rem;
             margin: 0.5rem 1rem;
             border-radius: 12px;
@@ -43,57 +49,59 @@
         }
         
         .nav-cyber .nav-link:hover, .nav-cyber .nav-link.active {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            color: var(--tbank-yellow) !important;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), transparent);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            color: var(--accent-cyan) !important;
         }
         
         .cyber-btn {
-            background: linear-gradient(45deg, var(--tbank-yellow), #FFC107);
+            background: var(--gradient-primary);
             border: none;
-            color: var(--tbank-black);
+            color: white;
             font-weight: 600;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 25px;
             transition: all 0.3s ease;
         }
         
         .cyber-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
         }
         
         .gradient-text {
-            background: linear-gradient(45deg, var(--tbank-yellow), #fff);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
         }
         
         .form-cyber {
-            background: rgba(255, 215, 0, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 15px;
+            background: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.15);
+            border-radius: 16px;
             padding: 2rem;
         }
         
         .form-cyber .form-control, .form-cyber .form-select {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.25);
             color: white;
             border-radius: 10px;
+            padding: 10px 15px;
         }
         
         .form-cyber .form-control:focus, .form-cyber .form-select:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--tbank-yellow);
-            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 0.2rem rgba(14, 165, 233, 0.25);
             color: white;
         }
         
         .form-cyber .form-label {
-            color: var(--tbank-yellow);
+            color: var(--accent-cyan);
             font-weight: 600;
+            margin-bottom: 0.5rem;
         }
         
         .step-indicator {
@@ -110,7 +118,7 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: rgba(255, 215, 0, 0.3);
+            background: rgba(14, 165, 233, 0.2);
             z-index: 1;
         }
         
@@ -125,54 +133,65 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(255, 215, 0, 0.2);
-            border: 2px solid rgba(255, 215, 0, 0.5);
+            background: rgba(14, 165, 233, 0.1);
+            border: 2px solid rgba(14, 165, 233, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 10px;
             font-weight: bold;
-            color: #ccc;
+            color: #cbd5e1;
             transition: all 0.3s ease;
         }
         
         .step.active .step-number {
-            background: var(--tbank-yellow);
-            border-color: var(--tbank-yellow);
-            color: var(--tbank-black);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+            color: white;
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
         }
         
         .step-text {
-            color: #ccc;
+            color: #94a3b8;
             font-size: 0.9rem;
         }
         
         .step.active .step-text {
-            color: var(--tbank-yellow);
+            color: var(--accent-cyan);
             font-weight: 600;
         }
         
         .ai-suggestion {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 10px;
-            padding: 1rem;
+            background: rgba(14, 165, 233, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+            border-radius: 12px;
+            padding: 1.25rem;
             margin-top: 1rem;
+        }
+        
+        .btn-outline-info {
+            border-color: var(--accent-teal);
+            color: var(--accent-cyan);
+        }
+        
+        .btn-outline-info:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
         }
     </style>
 </head>
 <body>
     <div class="position-fixed w-100 h-100" style="
         background: 
-            radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%);
+            radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.08) 0%, transparent 50%);
         z-index: -1;
     "></div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(15px);">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="index.html" style="background: linear-gradient(45deg, #FFD700, #FFC107); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(10, 25, 41, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(14, 165, 233, 0.15);">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="index.html" style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                 <i class="bi bi-cpu-fill me-2"></i>
                 Т-Банк | AI Analytics
             </a>
@@ -186,7 +205,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">
-                                <i class="bi bi-graph-up-arrow me-2"></i>
+                                <i class="bi bi-speedometer2 me-2"></i>
                                 AI Дашборд
                             </a>
                         </li>
@@ -215,7 +234,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="gradient-text">Создание умного тикета</h1>
-                    <a href="table.html" class="btn btn-outline-warning">
+                    <a href="table.html" class="btn btn-outline-info">
                         <i class="bi bi-arrow-left me-2"></i>Назад
                     </a>
                 </div>
@@ -306,8 +325,8 @@
                             <!-- AI Suggestion -->
                             <div class="ai-suggestion">
                                 <div class="d-flex align-items-center mb-2">
-                                    <i class="bi bi-robot text-warning me-2"></i>
-                                    <strong class="text-warning">AI Рекомендация</strong>
+                                    <i class="bi bi-robot text-info me-2"></i>
+                                    <strong class="text-info">AI Рекомендация</strong>
                                 </div>
                                 <p class="mb-0 text-light">На основе анализа похожих тикетов, рекомендуем направить в отдел карточных продуктов. Среднее время решения: 15 минут.</p>
                             </div>
@@ -315,11 +334,11 @@
                             <div class="mb-3">
                                 <label for="attachments" class="form-label">Прикрепленные файлы</label>
                                 <input type="file" class="form-control" id="attachments" multiple>
-                                <div class="form-text text-warning">Можно прикрепить несколько файлов (макс. 10MB каждый)</div>
+                                <div class="form-text text-info">Можно прикрепить несколько файлов (макс. 10MB каждый)</div>
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                                <button type="button" class="btn btn-outline-warning me-md-2">Очистить</button>
+                                <button type="button" class="btn btn-outline-info me-md-2">Очистить</button>
                                 <button type="submit" class="cyber-btn">
                                     <i class="bi bi-plus-circle me-2"></i>Создать умный тикет
                                 </button>
@@ -331,14 +350,14 @@
         </div>
     </div>
 
-    <footer class="bg-dark text-light py-4 mt-5" style="background: rgba(26, 26, 26, 0.95) !important;">
-        <div class="container-fluid">
-            <div class="row">
+    <footer class="py-4 mt-5" style="background: rgba(10, 25, 41, 0.95); border-top: 1px solid rgba(14, 165, 233, 0.15);">
+        <div class="container-fluid px-4">
+            <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h5 class="gradient-text">Т-Банк AI Analytics</h5>
+                    <h5 class="gradient-text mb-0">Т-Банк AI Analytics</h5>
                 </div>
-                <div class="col-md-6 text-end">
-                    <p class="mb-0">&copy; 2024 Т-Банк. Neural Network Powered.</p>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-muted">&copy; 2024 Т-Банк. Neural Network Powered.</p>
                 </div>
             </div>
         </div>
