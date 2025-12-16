@@ -9,33 +9,43 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --tbank-yellow: #FFD700;
-            --tbank-black: #1a1a1a;
-            --tbank-dark: #2d2d2d;
-            --tbank-gold: #FFC107;
+            --primary-dark: #0a1929;
+            --primary-blue: #1a365d;
+            --accent-teal: #0ea5e9;
+            --accent-cyan: #22d3ee;
+            --neutral-light: #f8fafc;
+            --neutral-gray: #64748b;
+            --neutral-dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient-primary: linear-gradient(135deg, #0ea5e9, #22d3ee);
+            --gradient-dark: linear-gradient(135deg, #0a1929, #1e293b);
         }
         
         body {
-            background: linear-gradient(135deg, var(--tbank-black) 0%, #333 100%);
-            color: white;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--gradient-dark);
+            color: var(--neutral-light);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
         }
         
         .navbar-brand {
-            background: linear-gradient(45deg, var(--tbank-yellow), var(--tbank-gold));
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
             font-size: 1.5rem;
+            letter-spacing: -0.5px;
         }
         
         .cyber-card {
-            background: rgba(45, 45, 45, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
-            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
@@ -47,8 +57,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            transition: left 0.7s ease;
         }
         
         .cyber-card:hover::before {
@@ -56,46 +66,47 @@
         }
         
         .cyber-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--tbank-yellow);
-            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
+            transform: translateY(-4px);
+            border-color: var(--accent-teal);
+            box-shadow: 0 12px 40px rgba(14, 165, 233, 0.2);
         }
         
         .metric-glow {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.05));
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(14, 165, 233, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.15);
         }
         
         .nav-cyber {
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(15px);
-            border-right: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(10, 25, 41, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(14, 165, 233, 0.15);
         }
         
         .nav-cyber .nav-link {
-            color: #ccc !important;
+            color: #cbd5e1 !important;
             padding: 1rem 1.5rem;
             margin: 0.5rem 1rem;
             border-radius: 12px;
             transition: all 0.3s ease;
             border: 1px solid transparent;
+            font-weight: 500;
         }
         
         .nav-cyber .nav-link:hover, .nav-cyber .nav-link.active {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
-            border-color: var(--tbank-yellow);
-            color: var(--tbank-yellow) !important;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), transparent);
+            border-color: var(--accent-teal);
+            color: var(--accent-cyan) !important;
             transform: translateX(5px);
         }
         
         .cyber-btn {
-            background: linear-gradient(45deg, var(--tbank-yellow), var(--tbank-gold));
+            background: var(--gradient-primary);
             border: none;
-            color: var(--tbank-black);
+            color: white;
             font-weight: 600;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 25px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
@@ -107,7 +118,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
         
@@ -117,21 +128,21 @@
         
         .cyber-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
         }
         
         .pulse {
-            animation: pulse 2s infinite;
+            animation: pulse 3s infinite;
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(14, 165, 233, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
         }
         
         .gradient-text {
-            background: linear-gradient(45deg, var(--tbank-yellow), #fff);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
@@ -145,12 +156,33 @@
         }
         
         .ai-chip {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: rgba(14, 165, 233, 0.12);
+            border: 1px solid rgba(14, 165, 233, 0.3);
             border-radius: 20px;
             padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            color: var(--tbank-yellow);
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 100%;
+            padding: 1rem;
+        }
+        
+        .insight-card {
+            background: rgba(14, 165, 233, 0.08);
+            border-left: 4px solid var(--accent-teal);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .insight-card:hover {
+            background: rgba(14, 165, 233, 0.12);
+            transform: translateX(5px);
         }
     </style>
 </head>
@@ -158,31 +190,31 @@
     <!-- Animated Background -->
     <div class="position-fixed w-100 h-100" style="
         background: 
-            radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
         z-index: -1;
     "></div>
 
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(15px);">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(10, 25, 41, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(14, 165, 233, 0.15);">
+        <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-cpu-fill me-2"></i>
-                Т-Банк | AI Аналитика
+                Т-Банк | AI Analytics
             </a>
             
             <div class="navbar-nav ms-auto">
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="color: var(--tbank-yellow);">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="color: var(--accent-cyan);">
                         <div class="ai-chip me-2">
-                            <i class="bi bi-robot me-1"></i>AI MODE
+                            <i class="bi bi-robot me-1"></i>AI ACTIVE
                         </div>
                         <i class="bi bi-person-circle me-2"></i>
                         Иванов А.В.
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item text-warning" href="auth.html"><i class="bi bi-box-arrow-right me-2"></i>Выйти</a></li>
+                    <ul class="dropdown-menu dropdown-menu-dark" style="background: rgba(30, 41, 59, 0.98); border: 1px solid rgba(14, 165, 233, 0.2);">
+                        <li><a class="dropdown-item text-info" href="auth.html"><i class="bi bi-box-arrow-right me-2"></i>Выйти</a></li>
                     </ul>
                 </div>
             </div>
@@ -192,17 +224,17 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block nav-cyber" style="min-height: 100vh;">
+            <nav class="col-md-3 col-lg-2 d-md-block nav-cyber" style="min-height: calc(100vh - 76px);">
                 <div class="position-sticky pt-4">
                     <div class="text-center mb-4">
                         <div class="ai-chip pulse">
-                            <i class="bi bi-lightning-charge-fill me-1"></i>REALTIME DATA
+                            <i class="bi bi-lightning-charge-fill me-1"></i>LIVE DATA
                         </div>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="index.html">
-                                <i class="bi bi-graph-up-arrow me-2"></i>
+                                <i class="bi bi-speedometer2 me-2"></i>
                                 AI Дашборд
                             </a>
                         </li>
@@ -239,7 +271,7 @@
                         </div>
                         <div class="col-md-4 text-end">
                             <button class="cyber-btn">
-                                <i class="bi bi-download me-2"></i>Экспорт в PDF
+                                <i class="bi bi-download me-2"></i>Экспорт отчета
                             </button>
                         </div>
                     </div>
@@ -254,8 +286,8 @@
                                 <h2 class="gradient-text mb-0">4.7/5</h2>
                                 <small class="text-success"><i class="bi bi-arrow-up"></i> +12% за месяц</small>
                             </div>
-                            <div class="p-3 rounded" style="background: rgba(255, 215, 0, 0.1);">
-                                <i class="bi bi-emoji-laughing fs-2" style="color: var(--tbank-yellow);"></i>
+                            <div class="p-3 rounded" style="background: rgba(14, 165, 233, 0.12);">
+                                <i class="bi bi-emoji-laughing fs-2" style="color: var(--accent-cyan);"></i>
                             </div>
                         </div>
                     </div>
@@ -265,10 +297,10 @@
                             <div>
                                 <h6 class="text-muted mb-2">NPS INDEX</h6>
                                 <h2 class="gradient-text mb-0">68</h2>
-                                <small class="text-primary">Промоутеры: 72%</small>
+                                <small class="text-info">Промоутеры: 72%</small>
                             </div>
-                            <div class="p-3 rounded" style="background: rgba(255, 215, 0, 0.1);">
-                                <i class="bi bi-graph-up-arrow fs-2" style="color: var(--tbank-yellow);"></i>
+                            <div class="p-3 rounded" style="background: rgba(14, 165, 233, 0.12);">
+                                <i class="bi bi-graph-up-arrow fs-2" style="color: var(--accent-cyan);"></i>
                             </div>
                         </div>
                     </div>
@@ -276,12 +308,12 @@
                     <div class="cyber-card p-4 metric-glow">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="text-muted mb-2">AVG RESPONSE</h6>
-                                <h2 class="gradient-text mb-0">2.3s</h2>
+                                <h6 class="text-muted mb-2">СРЕД. ОТВЕТ</h6>
+                                <h2 class="gradient-text mb-0">2.3с</h2>
                                 <small class="text-warning">AI оптимизация</small>
                             </div>
-                            <div class="p-3 rounded" style="background: rgba(255, 215, 0, 0.1);">
-                                <i class="bi bi-lightning-charge fs-2" style="color: var(--tbank-yellow);"></i>
+                            <div class="p-3 rounded" style="background: rgba(14, 165, 233, 0.12);">
+                                <i class="bi bi-lightning-charge fs-2" style="color: var(--accent-cyan);"></i>
                             </div>
                         </div>
                     </div>
@@ -293,8 +325,8 @@
                                 <h2 class="gradient-text mb-0">85%</h2>
                                 <small class="text-info">AI ассистент</small>
                             </div>
-                            <div class="p-3 rounded" style="background: rgba(255, 215, 0, 0.1);">
-                                <i class="bi bi-robot fs-2" style="color: var(--tbank-yellow);"></i>
+                            <div class="p-3 rounded" style="background: rgba(14, 165, 233, 0.12);">
+                                <i class="bi bi-robot fs-2" style="color: var(--accent-cyan);"></i>
                             </div>
                         </div>
                     </div>
@@ -303,13 +335,13 @@
                 <!-- Charts -->
                 <div class="row g-4">
                     <div class="col-lg-8">
-                        <div class="cyber-card p-4">
+                        <div class="cyber-card p-4 h-100">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h5 class="gradient-text mb-0">AI Predictive Analytics</h5>
                                 <div class="btn-group">
-                                    <button class="btn btn-outline-warning btn-sm active">Live</button>
-                                    <button class="btn btn-outline-warning btn-sm">24h</button>
-                                    <button class="btn btn-outline-warning btn-sm">7d</button>
+                                    <button class="btn btn-outline-info btn-sm active">Live</button>
+                                    <button class="btn btn-outline-info btn-sm">24h</button>
+                                    <button class="btn btn-outline-info btn-sm">7d</button>
                                 </div>
                             </div>
                             <canvas id="aiChart" height="250"></canvas>
@@ -317,8 +349,8 @@
                     </div>
                     
                     <div class="col-lg-4">
-                        <div class="cyber-card p-4">
-                            <h5 class="gradient-text mb-4">Channel Distribution</h5>
+                        <div class="cyber-card p-4 h-100">
+                            <h5 class="gradient-text mb-4">Распределение каналов</h5>
                             <canvas id="channelChart" height="250"></canvas>
                         </div>
                     </div>
@@ -331,9 +363,9 @@
                     </h5>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="cyber-card p-3 mb-3" style="background: rgba(255, 215, 0, 0.05);">
+                            <div class="insight-card">
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-lightbulb text-warning me-3"></i>
+                                    <i class="bi bi-lightbulb text-info me-3"></i>
                                     <div>
                                         <h6 class="mb-1">Увеличить чат-ботов</h6>
                                         <small class="text-muted">Снизит нагрузку на операторов на 23%</small>
@@ -342,12 +374,34 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="cyber-card p-3 mb-3" style="background: rgba(255, 215, 0, 0.05);">
+                            <div class="insight-card">
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-graph-up text-warning me-3"></i>
+                                    <i class="bi bi-graph-up text-info me-3"></i>
                                     <div>
                                         <h6 class="mb-1">Пиковое время: 14:00-16:00</h6>
                                         <small class="text-muted">Рекомендуем +2 оператора</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="insight-card">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-chat-dots text-info me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Улучшить шаблоны ответов</h6>
+                                        <small class="text-muted">CSAT вырастет на 8%</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="insight-card">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-clock text-info me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Сократить время перевода</h6>
+                                        <small class="text-muted">Среднее время 4.2 мин → 2.5 мин</small>
                                     </div>
                                 </div>
                             </div>
@@ -359,15 +413,15 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-4 mt-5" style="background: rgba(26, 26, 26, 0.95) !important;">
-        <div class="container-fluid">
-            <div class="row">
+    <footer class="py-4 mt-5" style="background: rgba(10, 25, 41, 0.95); border-top: 1px solid rgba(14, 165, 233, 0.15);">
+        <div class="container-fluid px-4">
+            <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h5 class="gradient-text">Т-Банк AI Analytics</h5>
-                    <p class="mb-0">Next Generation Customer Experience Platform</p>
+                    <h5 class="gradient-text mb-2">Т-Банк AI Analytics</h5>
+                    <p class="text-light mb-0">Next Generation Customer Experience Platform</p>
                 </div>
-                <div class="col-md-6 text-end">
-                    <p class="mb-0">&copy; 2024 Т-Банк. Neural Network Powered.</p>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-muted">&copy; 2024 Т-Банк. Neural Network Powered.</p>
                 </div>
             </div>
         </div>
@@ -385,8 +439,8 @@
                 datasets: [{
                     label: 'CSAT Prediction',
                     data: [4.5, 4.7, 4.8, 4.6, 4.9, 4.7, 4.8],
-                    borderColor: '#FFD700',
-                    backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                    borderColor: '#0ea5e9',
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4
@@ -394,19 +448,37 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        labels: { color: '#FFD700' }
+                        labels: { 
+                            color: '#0ea5e9',
+                            font: { size: 12 }
+                        }
                     }
                 },
                 scales: {
                     y: {
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        ticks: { color: '#ccc' }
+                        grid: { 
+                            color: 'rgba(100, 116, 139, 0.2)',
+                            borderDash: [5, 5]
+                        },
+                        ticks: { 
+                            color: '#cbd5e1',
+                            font: { size: 11 }
+                        },
+                        min: 4.0,
+                        max: 5.0
                     },
                     x: {
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        ticks: { color: '#ccc' }
+                        grid: { 
+                            color: 'rgba(100, 116, 139, 0.2)',
+                            borderDash: [5, 5]
+                        },
+                        ticks: { 
+                            color: '#cbd5e1',
+                            font: { size: 11 }
+                        }
                     }
                 }
             }
@@ -416,21 +488,31 @@
         const channelChart = new Chart(channelCtx, {
             type: 'doughnut',
             data: {
-                labels: ['AI Chat', 'Phone', 'Email', 'Branch'],
+                labels: ['AI Chat', 'Телефон', 'Email', 'Отделение'],
                 datasets: [{
                     data: [45, 30, 15, 10],
                     backgroundColor: [
-                        '#FFD700',
-                        '#FFC107',
-                        '#FFA000',
-                        '#FF6F00'
-                    ]
+                        '#0ea5e9',
+                        '#22d3ee',
+                        '#38bdf8',
+                        '#7dd3fc'
+                    ],
+                    borderWidth: 0,
+                    spacing: 5
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
                 plugins: {
                     legend: {
-                        labels: { color: '#ccc' }
+                        position: 'bottom',
+                        labels: { 
+                            color: '#cbd5e1',
+                            font: { size: 11 },
+                            padding: 20
+                        }
                     }
                 }
             }
@@ -438,13 +520,13 @@
 
         // Real-time data simulation
         setInterval(() => {
-            const randomIncrement = (Math.random() - 0.5) * 0.1;
+            const randomIncrement = (Math.random() - 0.5) * 0.05;
             const newData = aiChart.data.datasets[0].data.map(value => 
-                Math.max(4.0, Math.min(5.0, value + randomIncrement))
+                Math.max(4.3, Math.min(4.95, value + randomIncrement))
             );
             aiChart.data.datasets[0].data = newData;
             aiChart.update('none');
-        }, 5000);
+        }, 3000);
     </script>
 </body>
 </html>
