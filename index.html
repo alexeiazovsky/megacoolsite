@@ -10,38 +10,30 @@
     <style>
         :root {
             --primary-dark: #0a1929;
-            --primary-blue: #1a365d;
             --accent-teal: #0ea5e9;
             --accent-cyan: #22d3ee;
             --accent-purple: #8b5cf6;
-            --neutral-light: #f8fafc;
-            --neutral-gray: #64748b;
-            --neutral-dark: #1e293b;
             --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
             --gradient-dark: linear-gradient(135deg, #0a1929 0%, #1e293b 100%);
-            --gradient-card: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
         
         body {
             background: var(--gradient-dark);
-            color: var(--neutral-light);
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #f8fafc;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
         
         /* Навигация */
         .navbar {
-            background: rgba(10, 25, 41, 0.98) !important;
+            background: rgba(10, 25, 41, 0.98);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
-            padding: 1rem 0;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+            padding: 0.5rem 0;
+            min-height: 56px;
         }
         
         .navbar-brand {
@@ -49,72 +41,82 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
-            font-size: 1.5rem;
-            letter-spacing: -0.5px;
-        }
-        
-        /* Карточки */
-        .cyber-card {
-            background: var(--gradient-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(14, 165, 233, 0.15);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(14, 165, 233, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-        }
-        
-        .cyber-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-teal);
-            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.25);
-        }
-        
-        .cyber-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.05), 
-                transparent);
-            transition: left 0.7s ease;
-        }
-        
-        .cyber-card:hover::before {
-            left: 100%;
+            font-size: 1.3rem;
         }
         
         /* Сайдбар */
         .sidebar {
             background: rgba(10, 25, 41, 0.95);
-            backdrop-filter: blur(20px);
             border-right: 1px solid rgba(14, 165, 233, 0.15);
-            min-height: calc(100vh - 76px);
-            padding-top: 2rem;
+            padding: 1rem 0;
+            min-height: calc(100vh - 56px);
         }
         
         .nav-link {
             color: #94a3b8 !important;
-            padding: 1rem 1.5rem;
-            margin: 0.5rem 1rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            padding: 0.75rem 1.25rem;
+            margin: 0.25rem 0.5rem;
+            border-radius: 10px;
+            transition: all 0.2s;
             border: 1px solid transparent;
         }
         
         .nav-link:hover, .nav-link.active {
-            background: linear-gradient(135deg, 
-                rgba(14, 165, 233, 0.15), 
-                rgba(139, 92, 246, 0.1));
+            background: rgba(14, 165, 233, 0.1);
             border-color: var(--accent-teal);
             color: var(--accent-cyan) !important;
-            transform: translateX(8px);
+            transform: translateX(5px);
+        }
+        
+        /* Карточки */
+        .cyber-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(14, 165, 233, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(14, 165, 233, 0.1);
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .cyber-card:hover {
+            border-color: var(--accent-teal);
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.2);
+        }
+        
+        /* Метрики */
+        .metric-card {
+            padding: 1rem;
+            height: 100%;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin: 0.25rem 0;
+        }
+        
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+        }
+        
+        /* Графики */
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+            margin-top: 0.5rem;
         }
         
         /* Кнопки */
@@ -123,16 +125,30 @@
             border: none;
             color: white;
             font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
         
         .cyber-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(14, 165, 233, 0.3);
+        }
+        
+        /* Инсайты */
+        .insight-card {
+            background: rgba(14, 165, 233, 0.05);
+            border-left: 3px solid var(--accent-purple);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s;
+        }
+        
+        .insight-card:hover {
+            background: rgba(14, 165, 233, 0.1);
+            transform: translateX(3px);
         }
         
         /* Текст */
@@ -143,112 +159,60 @@
             font-weight: 700;
         }
         
-        /* Метрики */
-        .metric-card {
-            padding: 1.5rem;
-            position: relative;
-        }
-        
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-            margin: 0.5rem 0;
-        }
-        
-        .metric-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(14, 165, 233, 0.1);
-            border: 1px solid rgba(14, 165, 233, 0.2);
-        }
-        
-        /* AI Chip */
         .ai-chip {
             background: rgba(14, 165, 233, 0.1);
             border: 1px solid rgba(14, 165, 233, 0.3);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
             color: var(--accent-cyan);
-            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
         }
         
-        /* Анимации */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        /* Компактные стили */
+        .compact {
+            margin: 0;
+            padding: 0;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .btn-group .btn {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.85rem;
         }
         
-        .pulse {
-            animation: pulse 3s infinite ease-in-out;
-        }
-        
-        .float {
-            animation: float 6s infinite ease-in-out;
-        }
-        
-        /* Графики контейнер */
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-        }
-        
-        /* Инсайты */
-        .insight-card {
-            background: rgba(14, 165, 233, 0.08);
-            border-left: 4px solid var(--accent-purple);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .insight-card:hover {
-            background: rgba(14, 165, 233, 0.12);
-            transform: translateX(8px);
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 0.5rem;
         }
         
         /* Футер */
         footer {
-            background: rgba(10, 25, 41, 0.98) !important;
+            background: rgba(10, 25, 41, 0.98);
             border-top: 1px solid rgba(14, 165, 233, 0.15);
-            margin-top: 4rem;
-            padding: 2rem 0;
+            padding: 1rem 0;
+            margin-top: 2rem;
         }
         
-        /* Responsive */
+        /* Адаптивность */
         @media (max-width: 768px) {
             .sidebar {
                 min-height: auto;
                 border-right: none;
                 border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+                padding: 0.5rem 0;
             }
             
             .metric-value {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
             
             .chart-container {
-                height: 250px;
+                height: 200px;
+            }
+            
+            .nav-link {
+                padding: 0.5rem 1rem;
             }
         }
     </style>
@@ -256,7 +220,7 @@
 <body>
     <!-- Навигация -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-3">
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-cpu-fill me-2"></i>
                 Т-Банк | AI Analytics
@@ -264,14 +228,14 @@
             
             <div class="navbar-nav ms-auto">
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="color: var(--accent-cyan);">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center py-2" href="#" role="button" data-bs-toggle="dropdown" style="color: var(--accent-cyan);">
                         <div class="ai-chip me-2">
-                            <i class="bi bi-robot me-1"></i>AI ACTIVE
+                            <i class="bi bi-robot me-1"></i>AI ON
                         </div>
                         <i class="bi bi-person-circle me-2"></i>
                         Иванов А.В.
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" style="background: rgba(30, 41, 59, 0.98); border: 1px solid rgba(14, 165, 233, 0.2);">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                         <li><a class="dropdown-item text-info" href="auth.html"><i class="bi bi-box-arrow-right me-2"></i>Выйти</a></li>
                     </ul>
                 </div>
@@ -280,40 +244,35 @@
     </nav>
 
     <!-- Основной контент -->
-    <div class="container-fluid mt-5 pt-4">
+    <div class="container-fluid mt-4 pt-2">
         <div class="row">
             <!-- Сайдбар -->
             <div class="col-md-3 col-lg-2 d-md-block sidebar">
-                <div class="position-sticky pt-4" style="top: 1rem;">
-                    <div class="text-center mb-4">
-                        <div class="ai-chip pulse">
-                            <i class="bi bi-lightning-charge-fill"></i>
-                            LIVE DATA
+                <div class="pt-3">
+                    <div class="text-center mb-3">
+                        <div class="ai-chip">
+                            <i class="bi bi-lightning-charge-fill"></i> LIVE
                         </div>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="index.html">
-                                <i class="bi bi-speedometer2 me-2"></i>
-                                AI Дашборд
+                                <i class="bi bi-speedometer2 me-2"></i>Дашборд
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="table.html">
-                                <i class="bi bi-table me-2"></i>
-                                Все тикеты
+                                <i class="bi bi-table me-2"></i>Тикеты
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="add-ticket.html">
-                                <i class="bi bi-plus-circle me-2"></i>
-                                Новый тикет
+                                <i class="bi bi-plus-circle me-2"></i>Новый
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="auth.html">
-                                <i class="bi bi-shield-lock me-2"></i>
-                                Безопасность
+                                <i class="bi bi-shield-lock me-2"></i>Безопасность
                             </a>
                         </li>
                     </ul>
@@ -321,34 +280,34 @@
             </div>
 
             <!-- Контент -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-3">
                 <!-- Заголовок -->
-                <div class="cyber-card mt-3 p-4">
+                <div class="cyber-card p-3 mb-3">
                     <div class="row align-items-center">
                         <div class="col-md-8">
-                            <h1 class="gradient-text mb-2">AI Аналитика поддержки</h1>
-                            <p class="text-light mb-0">Нейросеть анализирует удовлетворенность клиентов в реальном времени</p>
+                            <h1 class="gradient-text mb-1">AI Аналитика поддержки</h1>
+                            <p class="text-light mb-0 small">Нейросеть анализирует удовлетворенность клиентов в реальном времени</p>
                         </div>
-                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <div class="col-md-4 text-md-end mt-2 mt-md-0">
                             <button class="cyber-btn">
-                                <i class="bi bi-download me-2"></i>Экспорт отчета
+                                <i class="bi bi-download me-1"></i>Экспорт
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Ключевые метрики -->
-                <div class="row g-4 mt-3">
+                <div class="row g-2 mb-3">
                     <div class="col-xl-3 col-md-6">
                         <div class="cyber-card metric-card">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <h6 class="text-muted mb-2">CSAT SCORE</h6>
-                                    <div class="metric-value">4.7<small style="font-size: 1rem;">/5</small></div>
-                                    <small class="text-success"><i class="bi bi-arrow-up"></i> +12% за месяц</small>
+                                    <div class="text-muted small mb-1">CSAT SCORE</div>
+                                    <div class="metric-value">4.7<small style="font-size: 0.8rem;">/5</small></div>
+                                    <div class="text-success small"><i class="bi bi-arrow-up"></i> +12% за месяц</div>
                                 </div>
                                 <div class="metric-icon">
-                                    <i class="bi bi-emoji-laughing fs-3" style="color: var(--accent-cyan);"></i>
+                                    <i class="bi bi-emoji-laughing fs-4" style="color: var(--accent-cyan);"></i>
                                 </div>
                             </div>
                         </div>
@@ -358,12 +317,12 @@
                         <div class="cyber-card metric-card">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <h6 class="text-muted mb-2">NPS INDEX</h6>
+                                    <div class="text-muted small mb-1">NPS INDEX</div>
                                     <div class="metric-value">68</div>
-                                    <small class="text-info">Промоутеры: 72%</small>
+                                    <div class="text-info small">Промоутеры: 72%</div>
                                 </div>
                                 <div class="metric-icon">
-                                    <i class="bi bi-graph-up-arrow fs-3" style="color: var(--accent-cyan);"></i>
+                                    <i class="bi bi-graph-up-arrow fs-4" style="color: var(--accent-cyan);"></i>
                                 </div>
                             </div>
                         </div>
@@ -373,12 +332,12 @@
                         <div class="cyber-card metric-card">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <h6 class="text-muted mb-2">СРЕД. ОТВЕТ</h6>
-                                    <div class="metric-value">2.3<small style="font-size: 1rem;">с</small></div>
-                                    <small class="text-warning">AI оптимизация</small>
+                                    <div class="text-muted small mb-1">СРЕД. ОТВЕТ</div>
+                                    <div class="metric-value">2.3<small style="font-size: 0.8rem;">с</small></div>
+                                    <div class="text-warning small">AI оптимизация</div>
                                 </div>
                                 <div class="metric-icon">
-                                    <i class="bi bi-lightning-charge fs-3" style="color: var(--accent-cyan);"></i>
+                                    <i class="bi bi-lightning-charge fs-4" style="color: var(--accent-cyan);"></i>
                                 </div>
                             </div>
                         </div>
@@ -388,12 +347,12 @@
                         <div class="cyber-card metric-card">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <h6 class="text-muted mb-2">FCR RATE</h6>
-                                    <div class="metric-value">85<small style="font-size: 1rem;">%</small></div>
-                                    <small class="text-info">AI ассистент</small>
+                                    <div class="text-muted small mb-1">FCR RATE</div>
+                                    <div class="metric-value">85<small style="font-size: 0.8rem;">%</small></div>
+                                    <div class="text-info small">AI ассистент</div>
                                 </div>
                                 <div class="metric-icon">
-                                    <i class="bi bi-robot fs-3" style="color: var(--accent-cyan);"></i>
+                                    <i class="bi bi-robot fs-4" style="color: var(--accent-cyan);"></i>
                                 </div>
                             </div>
                         </div>
@@ -401,15 +360,15 @@
                 </div>
 
                 <!-- Графики -->
-                <div class="row g-4 mt-3">
+                <div class="row g-2 mb-3">
                     <div class="col-lg-8">
-                        <div class="cyber-card p-4 h-100">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="cyber-card p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h5 class="gradient-text mb-0">AI Predictive Analytics</h5>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm active live-btn" onclick="switchChart('live')">Live</button>
-                                    <button class="btn btn-sm" onclick="switchChart('daily')">24h</button>
-                                    <button class="btn btn-sm" onclick="switchChart('weekly')">7d</button>
+                                    <button class="btn btn-sm btn-info active" onclick="switchChart('live')">Live</button>
+                                    <button class="btn btn-sm btn-outline-info" onclick="switchChart('daily')">24h</button>
+                                    <button class="btn btn-sm btn-outline-info" onclick="switchChart('weekly')">7d</button>
                                 </div>
                             </div>
                             <div class="chart-container">
@@ -419,8 +378,8 @@
                     </div>
                     
                     <div class="col-lg-4">
-                        <div class="cyber-card p-4 h-100">
-                            <h5 class="gradient-text mb-4">Распределение каналов</h5>
+                        <div class="cyber-card p-3 h-100">
+                            <h5 class="gradient-text mb-2">Распределение каналов</h5>
                             <div class="chart-container">
                                 <canvas id="channelChart"></canvas>
                             </div>
@@ -429,24 +388,24 @@
                 </div>
 
                 <!-- AI Insights -->
-                <div class="cyber-card mt-4 p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="cyber-card p-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
                         <h5 class="gradient-text mb-0">
-                            <i class="bi bi-robot me-2"></i>AI Insights & Recommendations
+                            <i class="bi bi-robot me-1"></i>AI Insights
                         </h5>
                         <span class="ai-chip">
-                            <i class="bi bi-cpu"></i> Real-time Analysis
+                            <i class="bi bi-cpu"></i> Real-time
                         </span>
                     </div>
                     
-                    <div class="row">
+                    <div class="row g-2">
                         <div class="col-md-6 col-lg-3">
                             <div class="insight-card">
                                 <div class="d-flex align-items-start">
-                                    <i class="bi bi-lightbulb text-info me-3 mt-1"></i>
+                                    <i class="bi bi-lightbulb text-info me-2 mt-1"></i>
                                     <div>
-                                        <h6 class="mb-1">Увеличить чат-ботов</h6>
-                                        <small class="text-muted">Снизит нагрузку на операторов на 23%</small>
+                                        <div class="small fw-bold mb-1">Увеличить чат-ботов</div>
+                                        <div class="text-muted small">-23% нагрузка на операторов</div>
                                     </div>
                                 </div>
                             </div>
@@ -454,10 +413,10 @@
                         <div class="col-md-6 col-lg-3">
                             <div class="insight-card">
                                 <div class="d-flex align-items-start">
-                                    <i class="bi bi-graph-up text-info me-3 mt-1"></i>
+                                    <i class="bi bi-graph-up text-info me-2 mt-1"></i>
                                     <div>
-                                        <h6 class="mb-1">Пиковое время</h6>
-                                        <small class="text-muted">14:00-16:00, нужно +2 оператора</small>
+                                        <div class="small fw-bold mb-1">Пиковое время</div>
+                                        <div class="text-muted small">14:00-16:00, нужно +2 оператора</div>
                                     </div>
                                 </div>
                             </div>
@@ -465,10 +424,10 @@
                         <div class="col-md-6 col-lg-3">
                             <div class="insight-card">
                                 <div class="d-flex align-items-start">
-                                    <i class="bi bi-chat-dots text-info me-3 mt-1"></i>
+                                    <i class="bi bi-chat-dots text-info me-2 mt-1"></i>
                                     <div>
-                                        <h6 class="mb-1">Шаблоны ответов</h6>
-                                        <small class="text-muted">Улучшить → CSAT +8%</small>
+                                        <div class="small fw-bold mb-1">Шаблоны ответов</div>
+                                        <div class="text-muted small">Улучшить → CSAT +8%</div>
                                     </div>
                                 </div>
                             </div>
@@ -476,10 +435,10 @@
                         <div class="col-md-6 col-lg-3">
                             <div class="insight-card">
                                 <div class="d-flex align-items-start">
-                                    <i class="bi bi-clock text-info me-3 mt-1"></i>
+                                    <i class="bi bi-clock text-info me-2 mt-1"></i>
                                     <div>
-                                        <h6 class="mb-1">Сократить перевод</h6>
-                                        <small class="text-muted">4.2 мин → 2.5 мин</small>
+                                        <div class="small fw-bold mb-1">Сократить перевод</div>
+                                        <div class="text-muted small">4.2 мин → 2.5 мин</div>
                                     </div>
                                 </div>
                             </div>
@@ -492,14 +451,14 @@
 
     <!-- Футер -->
     <footer>
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-3">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h5 class="gradient-text mb-2">Т-Банк AI Analytics</h5>
-                    <p class="text-light mb-0">Next Generation Customer Experience Platform</p>
+                    <div class="gradient-text fw-bold mb-1">Т-Банк AI Analytics</div>
+                    <div class="text-light small">Next Generation Customer Experience Platform</div>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="mb-0 text-muted">&copy; 2024 Т-Банк. Neural Network Powered.</p>
+                    <div class="text-muted small">&copy; 2024 Т-Банк. Neural Network Powered.</div>
                 </div>
             </div>
         </div>
@@ -508,9 +467,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Настройки стилей для Chart.js
+        // Настройки Chart.js
         Chart.defaults.color = '#94a3b8';
-        Chart.defaults.borderColor = 'rgba(100, 116, 139, 0.2)';
+        Chart.defaults.borderColor = 'rgba(100, 116, 139, 0.1)';
         
         // Основной график
         const aiCtx = document.getElementById('aiChart').getContext('2d');
@@ -524,44 +483,29 @@
                 labels: ['AI Чат', 'Телефон', 'Email', 'Отделение'],
                 datasets: [{
                     data: [45, 30, 15, 10],
-                    backgroundColor: [
-                        '#0ea5e9',
-                        '#22d3ee',
-                        '#8b5cf6',
-                        '#38bdf8'
-                    ],
+                    backgroundColor: ['#0ea5e9', '#22d3ee', '#8b5cf6', '#38bdf8'],
                     borderWidth: 0,
-                    spacing: 5,
-                    hoverOffset: 15
+                    spacing: 3
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                cutout: '70%',
+                cutout: '65%',
                 plugins: {
                     legend: {
                         position: 'bottom',
                         labels: { 
                             color: '#cbd5e1',
-                            font: { size: 12 },
-                            padding: 20,
-                            usePointStyle: true,
-                            pointStyle: 'circle'
+                            font: { size: 11 },
+                            padding: 15
                         }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(30, 41, 59, 0.9)',
-                        titleColor: '#f8fafc',
-                        bodyColor: '#cbd5e1',
-                        borderColor: '#0ea5e9',
-                        borderWidth: 1
                     }
                 }
             }
         });
         
-        // Функция инициализации основного графика
+        // Функция инициализации графика
         function initMainChart(type = 'live') {
             const labels = {
                 live: ['06:00', '09:00', '12:00', '15:00', '18:00', '21:00', '00:00'],
@@ -575,9 +519,7 @@
                 weekly: [4.5, 4.6, 4.7, 4.8]
             };
             
-            if (aiChart) {
-                aiChart.destroy();
-            }
+            if (aiChart) aiChart.destroy();
             
             aiChart = new Chart(aiCtx, {
                 type: 'line',
@@ -588,56 +530,30 @@
                         data: data[type],
                         borderColor: '#0ea5e9',
                         backgroundColor: 'rgba(14, 165, 233, 0.1)',
-                        borderWidth: 3,
+                        borderWidth: 2,
                         fill: true,
                         tension: 0.4,
-                        pointBackgroundColor: '#0ea5e9',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: 6,
-                        pointHoverRadius: 8
+                        pointRadius: 4,
+                        pointHoverRadius: 6
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(30, 41, 59, 0.9)',
-                            titleColor: '#f8fafc',
-                            bodyColor: '#cbd5e1',
-                            borderColor: '#0ea5e9',
-                            borderWidth: 1
-                        }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         y: {
-                            min: type === 'live' ? 4.0 : 4.2,
+                            min: 4.0,
                             max: 5.0,
-                            grid: {
-                                color: 'rgba(100, 116, 139, 0.1)',
-                                borderDash: [5, 5]
-                            },
-                            ticks: {
+                            grid: { color: 'rgba(100, 116, 139, 0.05)' },
+                            ticks: { 
                                 color: '#94a3b8',
-                                font: { size: 12 },
-                                callback: function(value) {
-                                    return value.toFixed(1);
-                                }
+                                callback: v => v.toFixed(1)
                             }
                         },
                         x: {
-                            grid: {
-                                color: 'rgba(100, 116, 139, 0.1)',
-                                borderDash: [5, 5]
-                            },
-                            ticks: {
-                                color: '#94a3b8',
-                                font: { size: 12 }
-                            }
+                            grid: { color: 'rgba(100, 116, 139, 0.05)' },
+                            ticks: { color: '#94a3b8' }
                         }
                     }
                 }
@@ -646,68 +562,49 @@
         
         // Переключение графиков
         function switchChart(type) {
-            // Обновляем активную кнопку
-            document.querySelectorAll('.live-btn').forEach(btn => {
-                btn.classList.remove('active');
-                btn.classList.remove('btn-info');
+            document.querySelectorAll('.btn-group .btn').forEach(btn => {
+                btn.classList.remove('active', 'btn-info');
                 btn.classList.add('btn-outline-info');
             });
-            event.target.classList.add('active');
+            event.target.classList.add('active', 'btn-info');
             event.target.classList.remove('btn-outline-info');
-            event.target.classList.add('btn-info');
-            
             initMainChart(type);
         }
         
-        // Инициализация при загрузке
+        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            initMainChart('live');
-            
-            // Стилизация кнопок
+            // Стили для кнопок
             const style = document.createElement('style');
             style.textContent = `
                 .btn-outline-info {
                     border-color: #0ea5e9;
                     color: #0ea5e9;
+                    background: transparent;
                 }
                 .btn-outline-info:hover {
-                    background-color: rgba(14, 165, 233, 0.1);
-                    border-color: #22d3ee;
-                    color: #22d3ee;
+                    background: rgba(14, 165, 233, 0.1);
                 }
                 .btn-info {
-                    background-color: #0ea5e9 !important;
+                    background: #0ea5e9 !important;
                     border-color: #0ea5e9 !important;
-                }
-                .btn {
-                    padding: 0.375rem 1rem;
-                    border-radius: 20px;
-                    transition: all 0.3s ease;
                 }
             `;
             document.head.appendChild(style);
             
-            // Real-time обновление графика
+            // Инициализация графика
+            initMainChart('live');
+            
+            // Обновление данных в реальном времени
             setInterval(() => {
-                if (aiChart && aiChart.data.datasets[0].data) {
-                    const newData = aiChart.data.datasets[0].data.map(value => {
-                        const change = (Math.random() - 0.5) * 0.05;
-                        return Math.max(4.3, Math.min(4.95, value + change));
+                if (aiChart?.data?.datasets[0]?.data) {
+                    const newData = aiChart.data.datasets[0].data.map(v => {
+                        const change = (Math.random() - 0.5) * 0.03;
+                        return Math.max(4.3, Math.min(4.95, v + change));
                     });
                     aiChart.data.datasets[0].data = newData;
                     aiChart.update('none');
                 }
-            }, 3000);
-            
-            // Анимация метрик
-            setInterval(() => {
-                document.querySelectorAll('.metric-card').forEach(card => {
-                    if (Math.random() > 0.7) {
-                        card.classList.add('float');
-                        setTimeout(() => card.classList.remove('float'), 6000);
-                    }
-                });
-            }, 8000);
+            }, 2000);
         });
     </script>
 </body>
